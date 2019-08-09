@@ -86,21 +86,23 @@ class Interface():
     def create_edit_spot(self, *args):
         item = None
         v = StringVar()
-        self.bottom_frame = Frame(self.root).grid(columnspan=6)
-        self.edit_spot = Entry(self.bottom_frame, textvariable=v)
+        bottom_frame = Frame(self.root).grid(columnspan=8, sticky='we')
+        self.edit_spot = Entry(bottom_frame, textvariable=v, )
         if len(args) == 3:
             item = args[2]
             self.edit_spot.insert(0, item)
         lb, f = args[0], args[1]
-        self.edit_spot.grid(row=2, column=0, columnspan=2)
+        self.edit_spot.grid(row=2, column=2, columnspan=4, padx=50, sticky='e')
 
-        self.bttn_apply = Button(self.bottom_frame, text='ok',
+        self.bttn_apply = Button(bottom_frame, text='ok',
         command=lambda: f(lb, self.edit_spot.get(), self.del_edit_spot, self.refresh_lb, item))
-        self.bttn_apply.grid(row=2, column=2)
-
+        self.bttn_apply.grid(row=2, column=4, sticky='e', columnspan=2)
+        self.bttn_cancel = Button(bottom_frame, text='cancel', command=lambda: self.del_edit_spot())
+        self.bttn_cancel.grid(row=2, column=6, sticky='w', columnspan=2)
     def del_edit_spot(self):
         self.edit_spot.destroy()
         self.bttn_apply.destroy()
+        self.bttn_cancel.destroy()
 
     def refresh_lb(self):
         self.pm.get_tree(self.lb_1)
