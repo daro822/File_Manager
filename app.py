@@ -9,5 +9,6 @@ interface = Interface(root, pm)
 pm.get_tree(interface.lb_1)
 pm.get_tree(interface.lb_2)
 
+
 root.mainloop()
 
